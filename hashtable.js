@@ -15,6 +15,9 @@ module.exports = function (limit) {
     // Preset limit
     limit = limit || 16;
     
+    // Load
+    me.load = 0;
+    
     // Allot the new array
     me.arr = new Array(limit);
     
@@ -31,22 +34,16 @@ module.exports = function (limit) {
     // Translate an object into an integer. This could benefit from better
     // big integer handling on the JS interpreters part as well as more 
     // research into developing an efficient hashing algorithm.
-    function intval(obj)
+    function hash(key)
     {
-        var chars = JSON.stringify(obj).split(''),
-            hash = 5381;
+        var chars = JSON.stringify(key).split(''),
+            hash = 5381,
+            l = this.arr.length;
         for (var i = 0; i < chars.length; i++)
         {
             hash = ((hash << 5) + hash) + chars[i].charCodeAt();
         }
-        return Math.abs(hash);
-    }
-    
-    // Does a quick `intval(key) % array.length` calc
-    function hash(key)
-    {
-        var l = this.arr.length;
-        return intval(key) % l;
+        return Math.abs(hash) % l;
     }
     
     // Check for a collision
