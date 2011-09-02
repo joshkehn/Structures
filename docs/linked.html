@@ -1,0 +1,92 @@
+<!DOCTYPE html>  <html> <head>   <title>linked.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="hashtable.html">                 hashtable.js               </a>                                           <a class="source" href="hashtest.html">                 hashtest.js               </a>                                           <a class="source" href="linked.html">                 linked.js               </a>                                           <a class="source" href="linkedtest.html">                 linkedtest.js               </a>                                           <a class="source" href="stack.html">                 stack.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               linked.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">Node</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+        <span class="nx">v</span> <span class="o">=</span> <span class="nx">val</span><span class="p">,</span>
+        <span class="nx">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">set</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">v</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">setNext</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">next</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">getNext</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">next</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="k">return</span> <span class="nx">self</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">LinkedList</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+        <span class="nx">first</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="nx">last</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+        
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="k">this</span> <span class="k">instanceof</span> <span class="nx">LinkedList</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">LinkedList</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">n</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">first</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nx">first</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Node</span><span class="p">();</span>
+            <span class="nx">first</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+            <span class="nx">last</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="nx">n</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Node</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+            <span class="nx">last</span><span class="p">.</span><span class="nx">setNext</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+            <span class="nx">last</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">prev</span><span class="p">,</span> <span class="nx">next</span><span class="p">;</span>
+        </pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Check if we have a list</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">first</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        </pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Find the correct value</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">current</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">get</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">val</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nx">prev</span> <span class="o">=</span> <span class="nx">current</span><span class="p">;</span>
+            <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">getNext</span><span class="p">();</span>
+        <span class="p">}</span>
+        </pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Remove the node</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="k">if</span> <span class="p">(</span><span class="nx">prev</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nx">prev</span><span class="p">.</span><span class="nx">setNext</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">getNext</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Value was in the first node, remove it.</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">first</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">tree</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">each</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">current</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nx">each</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">get</span><span class="p">());</span>
+            <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">getNext</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    
+    <span class="k">return</span> <span class="nx">self</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">LinkedList</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">Node</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">;</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">Node</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">;</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">LinkedList</span><span class="p">;</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
