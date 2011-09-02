@@ -38,15 +38,17 @@ int main()
     fputs("Stacking?\n", stdout);
     STACK s;
     STACK * ref = &s;
-    push(ref, 1);
-    push(ref, 2);
-    push(ref, 3);
-    push(ref, 4);
-    push(ref, 5);
-    printf("popped: %d\n", pop(ref));
-    printf("popped: %d\n", pop(ref));
-    printf("popped: %d\n", pop(ref));
-    printf("popped: %d\n", pop(ref));
-    printf("popped: %d\n", pop(ref));
+    int i;
+
+    for(i = 0; i < 256; i++)
+    {
+        push(ref, i);
+    }
+
+    for(i = 0; i < 256; i++)
+    {
+        printf("Popped %d\n", pop(ref));
+    }
+
     return 0;
 }
