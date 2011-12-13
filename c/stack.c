@@ -3,52 +3,60 @@
 
 typedef struct
 {
-    int size;
-    int items[256];
+    const int size;
+    int pos;
+    int * items;
 } STACK;
 
 void push (STACK * s, int x)
 {
-    if (s->size == 256)
+    if (s->pos > s->size)
     {
         fputs("Error: Stack overflow\n", stderr);
         exit(1);
     }
     else
     {
-        s->items[s->size++] = x;
+        s->items[s->pos++] = x;
     }
 }
 
 int pop (STACK * s)
 {
-    if (s->size == 0)
+    if (s->pos == 0)
     {
         fputs("Error: Stack underflow\n", stderr);
         exit(2);
     }
     else
     {
-        return s->items[--s->size];
+        return s->items[--s->pos];
     }
 }
 
 int main()
 {
+    int size = 256;
+    STACK init = {size};
+    STACK * s = malloc(sizeof(*s));
+    memcpy(s, &init, sizeof(*s));
+    s->items = malloc(sizeof(int) * size);
+
     fputs("Stacking?\n", stdout);
-    STACK s;
-    STACK * ref = &s;
+
     int i;
 
-    for(i = 0; i < 256; i++)
+    for(i = 0; i < size; i++)
     {
-        push(ref, i);
+        push(s, i);
     }
 
-    for(i = 0; i < 256; i++)
+    for(i = 0; i < size; i++)
     {
-        printf("Popped %d\n", pop(ref));
+        pop(s);
     }
 
+    free(s->items);
+    free(s);
     return 0;
 }
